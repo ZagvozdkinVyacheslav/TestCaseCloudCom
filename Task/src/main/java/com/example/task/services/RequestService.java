@@ -1,30 +1,40 @@
 package com.example.task.services;
 
 
-import com.example.task.requests.PostRequest;
-import org.springframework.stereotype.Service;
+import com.example.task.algorithm.TaskAlg;
+import com.example.task.repository.RequestRepository;
+import com.example.task.entyties.PostRequest;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.task.repository.StopWordsRepository;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
+import ru.stachek66.nlp.mystem.holding.MyStemApplicationException;
+
 
 @Service
 public class RequestService {
+    private final RequestRepository requestRepository;
+    private final StopWordsRepository stopWordsRepository;
 
-    private ArrayList<PostRequest> lst = new ArrayList<>();
-    public List<PostRequest> list(){
-        return lst;
+
+    public RequestService(RequestRepository requestRepository, StopWordsRepository stopWordsRepository) {
+        this.requestRepository = requestRepository;
+
+        this.stopWordsRepository = stopWordsRepository;
     }
 
-    public void add(String str1, String str2) {
-        PostRequest postRequest = new PostRequest(1,1,Algorithm(str1),Algorithm(str2),outerValueAlg(str1, str2));
-        lst.add(postRequest);
-    }
-    private String Algorithm(String str){
+    @SneakyThrows
+    public void add(String str1, String str2)  {
 
-        return str + str;
-    }
-    private String outerValueAlg(String str1,String str2){
 
-        return Integer.toString(str1.length() + str2.length()) + "%" ;
+        requestRepository.save(algAndRetRequest(str1,str2));
     }
+    public PostRequest algAndRetRequest(String str1, String str2) throws MyStemApplicationException {
+        TaskAlg taskAlg = new TaskAlg(stopWordsRepository);
+
+        String algForStr1 = taskAlg.Algorithm(str1);
+        String algForStr2 = taskAlg.Algorithm(str2);
+        return new PostRequest(algForStr1, algForStr2, taskAlg.outerValueAlg(algForStr1, algForStr2));
+    }
+
 }
