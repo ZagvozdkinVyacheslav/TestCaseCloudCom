@@ -10,14 +10,16 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long userId;
     private String login;
     private String password;
+    private String role;
 
-    public Users(String login, String password) {
+    public Users(String login, String password, String role) {
         this.login = login;
         this.password = password;
+        this.role = role;
     }
     public Users() {
 
@@ -46,5 +48,12 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

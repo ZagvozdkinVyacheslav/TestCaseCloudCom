@@ -1,5 +1,6 @@
 package com.example.task.controllers;
 
+import com.example.task.algorithm.HtmlReader;
 import com.example.task.entyties.PostRequest;
 import com.example.task.entyties.StopWord;
 import com.example.task.repository.StopWordsRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 public class RequestController {
     private final RequestService requestService;
     private final StopWordsRepository stopWordsRepository;
+    private final HtmlReader htmlReader = new HtmlReader();
 
     public RequestController(RequestService requestService, StopWordsRepository stopWordsRepository) {
         this.requestService = requestService;
@@ -23,32 +25,14 @@ public class RequestController {
 
     @GetMapping(path = "/main")
     public String getDefault() {
-        if(stopWordsRepository.count() == 0){
-            addStopWordsToBD();
-        }
-        StringBuilder sb = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/templates/main/index.html"));
-
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-
-            br.close();
-        } catch (Exception e) {
-        } finally {
-
-        }
-
-        return sb.toString();
+        if(stopWordsRepository.count() == 0) addStopWordsToBD();
+        return htmlReader.readHtml("src/main/resources/templates/main/index.html");
     }
-    @PostMapping(path = "/main")
-    public void add (@RequestParam String str1, @RequestParam String str2){
-        requestService.add(str1,str2);
 
+    @PostMapping(path = "/main")
+    public String add (@RequestParam String str1, @RequestParam String str2){
+        requestService.add(str1,str2);
+        return htmlReader.readHtml("src/main/resources/templates/main/index.html");
     }
     private void addStopWordsToBD(){
         try {

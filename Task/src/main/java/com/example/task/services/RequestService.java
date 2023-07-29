@@ -25,8 +25,6 @@ public class RequestService {
 
     @SneakyThrows
     public void add(String str1, String str2)  {
-
-
         requestRepository.save(algAndRetRequest(str1,str2));
     }
     public PostRequest algAndRetRequest(String str1, String str2) throws MyStemApplicationException {

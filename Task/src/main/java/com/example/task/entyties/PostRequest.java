@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 @Entity
 public class PostRequest {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private long userId;
     private String str1;
