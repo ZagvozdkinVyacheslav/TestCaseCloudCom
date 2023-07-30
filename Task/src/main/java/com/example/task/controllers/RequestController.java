@@ -23,16 +23,25 @@ public class RequestController {
         this.stopWordsRepository = stopWordsRepository;
     }
 
+    @GetMapping(path = "/res")
+    public String getResult() {
+        return htmlReader.readHtml("src/main/resources/templates/result.html");
+    }
+    @RequestMapping("")
+    public String get1() {
+
+        return htmlReader.readHtml("src/main/resources/templates/index.html");
+    }
     @GetMapping(path = "/main")
     public String getDefault() {
         if(stopWordsRepository.count() == 0) addStopWordsToBD();
-        return htmlReader.readHtml("src/main/resources/templates/main/index.html");
+        return htmlReader.readHtml("src/main/resources/templates/index.html");
     }
 
     @PostMapping(path = "/main")
     public String add (@RequestParam String str1, @RequestParam String str2){
         requestService.add(str1,str2);
-        return htmlReader.readHtml("src/main/resources/templates/main/index.html");
+        return htmlReader.readHtml("src/main/resources/templates/index.html");
     }
     private void addStopWordsToBD(){
         try {

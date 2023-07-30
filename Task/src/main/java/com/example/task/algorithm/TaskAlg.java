@@ -28,31 +28,21 @@ public class TaskAlg {
     }
 
     private String deleteStopWords(String inputStr){
-
-        String lowerCaseStr = inputStr.toLowerCase();//перевод в нижний регистр
         StringBuilder retStr = new StringBuilder();
-        ArrayList<Integer> indexToDel = new ArrayList<>();
-        String[] splStr = lowerCaseStr.split(" ");
+        boolean fl;
+        String[] splStr = inputStr.toLowerCase().split(" ");
 
-        for (int i = 0; i < splStr.length; i++) {//пишем индыксы стоп слов в строке
+        for (String str:splStr) {
+            fl = true;
             for (long j = 1; j <= stopWordsRepository.count(); j++) {
-                if(splStr[i].equals(stopWordsRepository.findById(j).get().getWord())){
-                    splStr[i] = "";
-                    indexToDel.add(i);
+                if(str.equals(stopWordsRepository.findById(j).get().getWord())){
+                    fl = false;
                     break;
                 }
             }
+            if(fl) retStr.append(str + " ");
         }
-        for (int i = 0; i < splStr.length; i++) {//собираем новую строку
-            for (int j = 0; j < indexToDel.size(); j++) {
-                if(i != indexToDel.get(j)){
-                    retStr.append(splStr[i]);
-                    if(i != splStr.length - 1) retStr.append(" ");
-                    break;
-                }
-            }
-
-        }
+        retStr.deleteCharAt(retStr.length() - 1);
         return retStr.toString();
 
     }

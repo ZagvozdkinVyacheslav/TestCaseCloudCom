@@ -1,0 +1,16 @@
+В вашем pg4admin нужно создать эти 2 таблицы
+CREATE TABLE users
+(
+    Id SERIAL PRIMARY KEY,
+    username CHARACTER VARYING(30),
+    password CHARACTER VARYING(30),
+    enabled boolean NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE authorities
+(
+    Id SERIAL PRIMARY KEY,
+    username CHARACTER VARYING(30),
+    authority CHARACTER VARYING(30)
+);
+
