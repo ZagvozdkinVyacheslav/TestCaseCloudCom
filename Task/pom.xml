@@ -19,7 +19,7 @@
     </properties>
 
     <dependencies>
-        <!--Spring and other------------------------------------------------>
+        <!--Spring and other-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -45,7 +45,7 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
       
-        <!--Data and hibernate----------------------------------------------->
+        <!--Data and hibernate-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -66,13 +66,13 @@
             <version>6.1.5.Final</version>
         </dependency>
       
-        <!--Library for algorithm------------------------------------------------>
+        <!--Library for algorithm-->
         <dependency>
             <groupId>ru.stachek66.nlp</groupId>
             <artifactId>mystem-scala</artifactId>
             <version>${ext.mystem-scala.version}</version>
         </dependency>
-        <!--Spring security and other---------------------------------------------->
+        <!--Spring security and other-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
