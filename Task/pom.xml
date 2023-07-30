@@ -3,13 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.example</groupId>
     <artifactId>Task</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -21,8 +19,7 @@
     </properties>
 
     <dependencies>
-
-        <!--Spring and other-->
+        <!--Spring and other------------------------------------------------>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -47,8 +44,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
-        <!--Data and hibernate-->
+      
+        <!--Data and hibernate----------------------------------------------->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -68,13 +65,14 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.1.5.Final</version>
         </dependency>
-        <!--Library for algorithm-->
+      
+        <!--Library for algorithm------------------------------------------------>
         <dependency>
             <groupId>ru.stachek66.nlp</groupId>
             <artifactId>mystem-scala</artifactId>
             <version>${ext.mystem-scala.version}</version>
         </dependency>
-        <!--Spring security and other-->
+        <!--Spring security and other---------------------------------------------->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -99,6 +97,7 @@
     </dependencies>
 
     <build>
+
 
         <plugins>
             <plugin>
