@@ -11,16 +11,19 @@
 </head>
 <body>
 <form class="form-signin" th:action="@{/login}" method="post">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <p><div><input class="form-control" type="text" name="username" placeholder="Username"/></div></p>
-    <p><div><input class="form-control" type="password" name="password" placeholder="Password"/></div></p>
+    <h2 class="form-signin-heading">Пожалуйста, войдите.</h2>
+    <p><div><input class="form-control" type="text" name="username" placeholder="Имя ползователя"/></div></p>
+    <p><div><input class="form-control" type="password" name="password" placeholder="Пароль"/></div></p>
     <div th:if="${param.error}">
-        Invalid username and password.
+        Неправильные имя пользователя или пароль.
     </div>
     <div th:if="${param.logout}">
-        You have been logged out.
+        Вы вышли из аккаунта.
     </div>
-    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign In"/></div>
+    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Войти"/></div>
+</form>
+<form class="form-signin" th:action="@{/registration}" method="get">
+    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Регистрация"/></div>
 </form>
 </body>
 </html>
