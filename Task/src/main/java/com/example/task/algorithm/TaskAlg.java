@@ -1,7 +1,9 @@
 package com.example.task.algorithm;
 
+import com.example.task.entyties.PostRequest;
 import com.example.task.repository.StopWordsRepository;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import ru.stachek66.nlp.mystem.holding.Factory;
 import ru.stachek66.nlp.mystem.holding.MyStem;
 import ru.stachek66.nlp.mystem.holding.MyStemApplicationException;
@@ -11,7 +13,9 @@ import scala.Option;
 import scala.collection.JavaConversions;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +26,16 @@ public class TaskAlg {
         this.stopWordsRepository = stopWordsRepository;
     }
 
+    public PostRequest algAndRetRequest(String str1, String str2) throws MyStemApplicationException {
+        TaskAlg taskAlg = new TaskAlg(stopWordsRepository);
 
+        String algForStr1 = taskAlg.Algorithm(str1);
+        String algForStr2 = taskAlg.Algorithm(str2);
+
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd 'time:' hh:mm:ss a");
+        return new PostRequest(algForStr1, algForStr2, taskAlg.outerValueAlg(algForStr1, algForStr2),"Created. date:" + formatForDateNow.format(dateNow));
+    }
     public String Algorithm(String str) throws MyStemApplicationException {
         return Lemmitization(deleteStopWords(str));
     }

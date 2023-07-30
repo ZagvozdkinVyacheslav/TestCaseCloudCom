@@ -18,11 +18,13 @@ public class PostRequest {
     private String str1;
     private String str2;
     private String outerValue;
+    private String dateTime;
 
-    public PostRequest(String str1, String str2, String outerValue) {
+    public PostRequest(String str1, String str2, String outerValue, String dateTime) {
         this.str1 = str1;
         this.str2 = str2;
         this.outerValue = outerValue;
+        this.dateTime = dateTime;
     }
 
     public PostRequest(){
@@ -68,15 +70,28 @@ public class PostRequest {
     public void setOuterValue(String outerValue) {
         this.outerValue = outerValue;
     }
+    public String getDateTime() {
+        return dateTime;
+    }
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
 
     @Override
     public String toString() {
         return "PostRequest{" +
                 "id=" + id +
                 ", userId=" + userId +
-                ", str1='" + str1 + '\'' +
-                ", str2='" + str2 + '\'' +
+                ", after alg str1='" + str1 + '\'' +
+                ", after alg str2='" + str2 + '\'' +
                 ", outerValue='" + outerValue + '\'' +
+                ", dateTime= '" + dateTime + '\'' +
                 '}';
     }
+
+
+
+
+
+
 }

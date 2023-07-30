@@ -29,9 +29,8 @@ public class OutValue {
                 }
             }
         }
-        if(str1.length() >= str2.length())
-            return Double.toString((double)count / (double)setFromStr1.size() * 100) + "%";
-        else
-            return Double.toString((double)count / (double)setFromStr2.size() * 100) + "%";
+
+        return Double.toString((double)count / (double)setFromStr1.size() * 100) + "%";
+
     }
 }

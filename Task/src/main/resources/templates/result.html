@@ -7,13 +7,14 @@
 </head>
 <body>
 
-<h2>Сравнение строк</h2>
-<div>
-  <p>Давай произведем аутентификацию?</p>
-</div>
+<td>
+  <select name="field1">
+    {{#list}}<option>{{.}}</option>{{/list}}
+  </select>
+</td>
 
-<form action="http://localhost:8081/login"  method="get">
-  <button>Аутентификация</button>
+<form action="http://localhost:8081/requests/main"  method="get">
+  <button>Назад</button>
 </form>
 </body>
 </html>

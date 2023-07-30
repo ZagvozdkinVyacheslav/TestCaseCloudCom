@@ -25,14 +25,9 @@ public class RequestService {
 
     @SneakyThrows
     public void add(String str1, String str2)  {
-        requestRepository.save(algAndRetRequest(str1,str2));
-    }
-    public PostRequest algAndRetRequest(String str1, String str2) throws MyStemApplicationException {
         TaskAlg taskAlg = new TaskAlg(stopWordsRepository);
-
-        String algForStr1 = taskAlg.Algorithm(str1);
-        String algForStr2 = taskAlg.Algorithm(str2);
-        return new PostRequest(algForStr1, algForStr2, taskAlg.outerValueAlg(algForStr1, algForStr2));
+        requestRepository.save(taskAlg.algAndRetRequest(str1,str2));
     }
+
 
 }
