@@ -1,21 +1,35 @@
 package com.example.task.services;
 
 
-import com.example.task.requests.PostRequest;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.task.algorithm.TaskAlg;
+import com.example.task.repository.RequestRepository;
+import com.example.task.entyties.PostRequest;
+
+import com.example.task.repository.StopWordsRepository;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
+import ru.stachek66.nlp.mystem.holding.MyStemApplicationException;
+
 
 @Service
 public class RequestService {
+    private final RequestRepository requestRepository;
+    private final StopWordsRepository stopWordsRepository;
 
-    private ArrayList<PostRequest> lst = new ArrayList<>();
-    public List<PostRequest> list(){
-        return lst;
+
+    public RequestService(RequestRepository requestRepository, StopWordsRepository stopWordsRepository) {
+        this.requestRepository = requestRepository;
+
+        this.stopWordsRepository = stopWordsRepository;
     }
 
-    public void add(PostRequest postRequest) {
-        lst.add(postRequest);
+    @SneakyThrows
+    public void add(String str1, String str2)  {
+        TaskAlg taskAlg = new TaskAlg(stopWordsRepository);
+        requestRepository.save(taskAlg.algAndRetRequest(str1,str2));
     }
+
+
+
 }
