@@ -34,13 +34,14 @@ public class TaskAlg {
 
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd 'time:' hh:mm:ss a");
-        return new PostRequest(algForStr1, algForStr2, taskAlg.outerValueAlg(algForStr1, algForStr2),"Created. date:" + formatForDateNow.format(dateNow));
+        return new PostRequest(algForStr1, algForStr2, outerValue.outerValueAlg(algForStr1, algForStr2),"Created. date:" + formatForDateNow.format(dateNow));
     }
     public String Algorithm(String str) throws MyStemApplicationException {
         return Lemmitization(deleteStopWords(str));
     }
 
     private String deleteStopWords(String inputStr){
+        inputStr = inputStr.replaceAll("\\p{Punct}", "");
         StringBuilder retStr = new StringBuilder();
         boolean fl;
         String[] splStr = inputStr.toLowerCase().split(" ");
@@ -48,7 +49,8 @@ public class TaskAlg {
         for (String str:splStr) {
             fl = true;
             for (long j = 1; j <= stopWordsRepository.count(); j++) {
-                if(str.equals(stopWordsRepository.findById(j).get().getWord())){
+                if(str.equals(stopWordsRepository.findById(j).get().getWord()))
+                {
                     fl = false;
                     break;
                 }
@@ -82,9 +84,6 @@ public class TaskAlg {
         if(sb.length() > 0)
             sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
-    }
-    public String outerValueAlg(String str1,String str2){
-        return outerValue.outerValueAlg(str1,str2);
     }
 
 }

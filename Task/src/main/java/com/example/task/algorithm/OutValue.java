@@ -2,6 +2,7 @@ package com.example.task.algorithm;
 
 import lombok.NoArgsConstructor;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +21,6 @@ public class OutValue {
         for (String str : str2.split(" "))
             setFromStr2.add(str);
 
-
         for (String i:setFromStr1) {
             for (String j:setFromStr2) {
                 if(i.equals(j)){
@@ -29,8 +29,6 @@ public class OutValue {
                 }
             }
         }
-
-        return Double.toString((double)count / (double)setFromStr1.size() * 100) + "%";
-
+        return new DecimalFormat("#.##").format((double)count / (double)setFromStr1.size() * 100) + "%";
     }
 }
