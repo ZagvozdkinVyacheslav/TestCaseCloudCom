@@ -58,10 +58,4 @@ public class MainController {
        }
         return htmlReader.readHtml("src/main/resources/templates/index.html");
     }
-
-
-
-
-
-
 }

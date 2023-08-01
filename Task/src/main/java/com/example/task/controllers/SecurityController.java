@@ -28,8 +28,6 @@ public class SecurityController {
     AuthorityRepository authorityRepository;
     @Autowired
     UserRepository userRepository;
-    HtmlReader htmlReader = new HtmlReader();
-
 
     @GetMapping("/registration")
     public ModelAndView getRegistration(String username, String password, String confirmPassword) throws IOException {

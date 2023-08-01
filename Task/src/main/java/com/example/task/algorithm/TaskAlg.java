@@ -29,7 +29,9 @@ public class TaskAlg {
     public TaskAlg(StopWordsRepository stopWordsRepository) {
         this.stopWordsRepository = stopWordsRepository;
     }
-
+    private final MyStem mystemAnalyzer =
+            new Factory("-igd --eng-gr --format json --weight")
+                    .newMyStem("3.0", Option.apply(new File("mystem.exe"))).get();
 
     public String Algorithm(String str) throws MyStemApplicationException {
         return Lemmitization(deleteStopWords(str));
@@ -56,10 +58,6 @@ public class TaskAlg {
         return retStr.toString();
 
     }
-    private final MyStem mystemAnalyzer =
-            new Factory("-igd --eng-gr --format json --weight")
-                    .newMyStem("3.0", Option.apply(new File("mystem.exe"))).get();
-
     private String Lemmitization(String inputStr) throws MyStemApplicationException {
         StringBuilder sb = new StringBuilder();
 
