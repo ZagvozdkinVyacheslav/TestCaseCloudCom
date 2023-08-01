@@ -5,8 +5,11 @@ import com.example.task.algorithm.HtmlReader;
 import com.example.task.entyties.StopWord;
 import com.example.task.repository.RequestRepository;
 import com.example.task.repository.StopWordsRepository;
+import com.example.task.repository.UserRepository;
 import com.example.task.services.RequestService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "requests")
 public class RequestController {
+    @Autowired
+    UserRepository userRepository;
     private final RequestService requestService;
 
     private final StopWordsRepository stopWordsRepository;
@@ -31,9 +36,10 @@ public class RequestController {
     }
 
     @GetMapping(path = "/res")
-    public List<String> getResult() {
+    public List<String> getResult(Authentication auth) {
+        var user =  userRepository.findUserByUsername(auth.getName());
 
-        return List.of(requestRepository.findAll().toString());
+        return List.of(requestRepository.findAllByUserId(user.getId()).toString());
     }
 
     @GetMapping(path = "/main")
@@ -43,8 +49,8 @@ public class RequestController {
     }
 
     @PostMapping(path = "/main")
-    public String add (@RequestParam String str1, @RequestParam String str2){
-        requestService.add(str1,str2);
+    public String add (Authentication auth, @RequestParam String str1, @RequestParam String str2){
+        requestService.add(auth, str1,str2);
         return htmlReader.readHtml("src/main/resources/templates/index.html");
     }
     private void addStopWordsToBD(){

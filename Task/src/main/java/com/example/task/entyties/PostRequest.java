@@ -20,11 +20,12 @@ public class PostRequest {
     private String outerValue;
     private String dateTime;
 
-    public PostRequest(String str1, String str2, String outerValue, String dateTime) {
+    public PostRequest(long userId, String str1, String str2, String outerValue, String dateTime) {
         this.str1 = str1;
         this.str2 = str2;
         this.outerValue = outerValue;
         this.dateTime = dateTime;
+        this.userId = userId;
     }
 
     public PostRequest(){

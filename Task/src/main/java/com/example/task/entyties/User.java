@@ -1,27 +1,45 @@
-//Для введения регистрации
 
 
 
-/*package com.example.task.entyties;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.example.task.entyties;
+
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+@Table(name = "users")
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String username;
+
     private String password;
-    private String authority;
+    private boolean enabled;
+
+    public User(long id, String username, String password, boolean enabled) {
+        this.id = id;
+        this.username = username;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(8);
+        this.password = encoder.encode(password);
+        this.enabled = enabled;
+    }
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(8);
+        this.password = encoder.encode(password);
+        this.enabled = enabled;
+    }
+
+    public User() {
+
+    }
 
     public long getId() {
         return id;
@@ -42,45 +60,20 @@ public class User implements UserDetails {
 
 
 
-    public String getPassword() {
-        return password;
-    }
+
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(8);
+        this.password = encoder.encode(password);
     }
 
-    public String getAuthority() {
-        return authority;
+    public boolean getEnabled() {
+        return enabled;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setAuthority(boolean enabled) {
+        this.enabled = enabled;
     }
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() ->getAuthority());
-    }
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-}*/
+}
