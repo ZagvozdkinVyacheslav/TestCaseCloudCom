@@ -20,11 +20,12 @@ public class PostRequest {
     private String outerValue;
     private String dateTime;
 
-    public PostRequest(String str1, String str2, String outerValue, String dateTime) {
+    public PostRequest(long userId, String str1, String str2, String outerValue, String dateTime) {
         this.str1 = str1;
         this.str2 = str2;
         this.outerValue = outerValue;
         this.dateTime = dateTime;
+        this.userId = userId;
     }
 
     public PostRequest(){
@@ -80,10 +81,8 @@ public class PostRequest {
     @Override
     public String toString() {
         return "PostRequest{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", after alg str1='" + str1 + '\'' +
-                ", after alg str2='" + str2 + '\'' +
+                " after alg1='" + str1 + '\'' +
+                ", after alg2='" + str2 + '\'' +
                 ", outerValue='" + outerValue + '\'' +
                 ", dateTime= '" + dateTime + '\'' +
                 '}';

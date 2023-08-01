@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org%22%3E/">
 <head>
   <title>Getting Started: Handling Form Submission</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,11 +7,15 @@
 </head>
 <body>
 
-<td>
-  <select name="field1">
-    {{#list}}<option>{{.}}</option>{{/list}}
-  </select>
-</td>
+
+<tbody>
+<tr th:each="postRequest : ${lst}">
+
+  <td><span th:text="${postRequest.toString()}"></span></td>
+  <br/>
+
+</tr>
+</tbody>
 
 <form action="http://localhost:8081/requests/main"  method="get">
   <button>Назад</button>

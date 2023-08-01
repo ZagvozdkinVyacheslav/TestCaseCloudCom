@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -20,7 +21,7 @@ public class SecurityConfig{
     DataSource dataSource;
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder(8);
     }
     @Bean
     public UserDetailsManager userDetailsManager(){
@@ -33,13 +34,14 @@ public class SecurityConfig{
                         .requestMatchers("/registration").permitAll()
                         .requestMatchers("/requests/main").hasRole("USER")
                         .requestMatchers("/requests/res").hasRole("USER")
+                        .requestMatchers("/requests/delete").hasRole("USER")
                         .anyRequest().authenticated()
 
 
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/requests/main")
+                        .defaultSuccessUrl("/requests/main", true)
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll()).csrf(csrf -> csrf.disable());
