@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 @NoArgsConstructor
 public class HtmlReader {
-
     public String readHtml(String path){
         StringBuilder sb = new StringBuilder();
         try {

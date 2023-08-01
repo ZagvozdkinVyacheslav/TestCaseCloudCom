@@ -34,10 +34,7 @@ public class SecurityConfig{
                         .requestMatchers("/registration").permitAll()
                         .requestMatchers("/requests/main").hasRole("USER")
                         .requestMatchers("/requests/res").hasRole("USER")
-                        .requestMatchers("/requests/delete").hasRole("USER")
                         .anyRequest().authenticated()
-
-
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
@@ -45,8 +42,6 @@ public class SecurityConfig{
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll()).csrf(csrf -> csrf.disable());
-
-
         return http.build();
     }
 }

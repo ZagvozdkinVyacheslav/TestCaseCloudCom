@@ -32,7 +32,6 @@ public class RequestService {
 
     public RequestService(RequestRepository requestRepository, StopWordsRepository stopWordsRepository) {
         this.requestRepository = requestRepository;
-
         this.stopWordsRepository = stopWordsRepository;
     }
 
@@ -71,9 +70,7 @@ public class RequestService {
 
         }
     }
-    public void deleteBd(Authentication auth){
-        requestRepository.deleteAllByUserId(userRepository.findUserByUsername(auth.getName()).getId());
-    }
+
 
 
 
