@@ -4,6 +4,7 @@ package com.example.task.services;
 
 import com.example.task.algorithm.OutValue;
 import com.example.task.algorithm.TaskAlg;
+import com.example.task.entyties.StopWord;
 import com.example.task.repository.RequestRepository;
 import com.example.task.entyties.PostRequest;
 
@@ -15,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ru.stachek66.nlp.mystem.holding.MyStemApplicationException;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,6 +54,28 @@ public class RequestService {
                 ,algForStr1, algForStr2, outerValue.outerValueAlg(algForStr1, algForStr2)
                 ,"Created. date:" + formatForDateNow.format(dateNow));
     }
+    public void checkBd(){
+        if(stopWordsRepository.count() == 0) addStopWordsToBD();
+    }
+    private void addStopWordsToBD(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/static/StopWords"));
+            String line = br.readLine();
+            while (line != null) {
+                stopWordsRepository.save(new StopWord(line));
+                line = br.readLine();
+            }
+            br.close();
+        } catch (Exception e) {
+        } finally {
+
+        }
+    }
+    public void deleteBd(Authentication auth){
+        requestRepository.deleteAllByUserId(userRepository.findUserByUsername(auth.getName()).getId());
+    }
+
+
 
 
 

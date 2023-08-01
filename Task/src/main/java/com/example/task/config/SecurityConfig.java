@@ -34,6 +34,7 @@ public class SecurityConfig{
                         .requestMatchers("/registration").permitAll()
                         .requestMatchers("/requests/main").hasRole("USER")
                         .requestMatchers("/requests/res").hasRole("USER")
+                        .requestMatchers("/requests/delete").hasRole("USER")
                         .anyRequest().authenticated()
 
 

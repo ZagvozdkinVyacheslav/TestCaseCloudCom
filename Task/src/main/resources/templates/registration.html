@@ -11,17 +11,17 @@
 </head>
 <body>
 <form class="form-signin" method="GET" action="/registration">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <p><div><input class="form-control" type="text" id="username" name="username" placeholder="Username" th:value="${username}" required/></div></p>
-    <p><div><input class="form-control" type="password" id="password" name="password" placeholder="Password" required/></div></p>
-    <p><div><input class="form-control" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required/></div></p>
+    <h2 class="form-signin-heading">Зарегестрируйтесь</h2>
+    <p><div><input class="form-control" type="text" id="username" name="username" placeholder="Имя" th:value="${username}" required/></div></p>
+    <p><div><input class="form-control" type="password" id="password" name="password" placeholder="Пароль" required/></div></p>
+    <p><div><input class="form-control" type="password" id="confirmPassword" name="confirmPassword" placeholder="Подтверждение пароля" required/></div></p>
     <div>
         <label th:text="${message}"></label>
     </div>
-    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign up"/></div>
+    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Зарегистрироваться"/></div>
 </form>
 <form class="form-signin" action="/login" method="post">
-    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Back"/></div>
+    <div><input class="btn btn-lg btn-primary btn-block" type="submit" value="Назад"/></div>
 </form>
 </body>
 </html>

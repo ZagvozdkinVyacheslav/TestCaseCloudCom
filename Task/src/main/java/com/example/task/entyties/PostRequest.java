@@ -81,10 +81,8 @@ public class PostRequest {
     @Override
     public String toString() {
         return "PostRequest{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", after alg str1='" + str1 + '\'' +
-                ", after alg str2='" + str2 + '\'' +
+                " after alg1='" + str1 + '\'' +
+                ", after alg2='" + str2 + '\'' +
                 ", outerValue='" + outerValue + '\'' +
                 ", dateTime= '" + dateTime + '\'' +
                 '}';

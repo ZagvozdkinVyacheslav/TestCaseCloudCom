@@ -38,22 +38,22 @@ public class SecurityController {
         if (username == null && password == null && confirmPassword == null) {
             return modelAndView;
         }
-        if (username.length() < 4 && username.length() > 30) {
-            modelAndView.addObject("message", "Username must be more than 4 and less than 30 characters!");
+        if (username.length() < 4 || username.length() > 30) {
+            modelAndView.addObject("message", "Имя должно быть более 4 символов и менее 30");
             return modelAndView;
         }
         if (!password.equals(confirmPassword)) {
             modelAndView.addObject("username", username);
-            modelAndView.addObject("message", "Passwords don`t match!");
+            modelAndView.addObject("message", "Пароли не совпадают");
             return modelAndView;
         }
-        if (password.length() < 6 && password.length() > 30) {
+        if (password.length() < 4 || password.length() > 20) {
             modelAndView.addObject("username", username);
-            modelAndView.addObject("message", "Password must be more than 6 and less than 30 characters!");
+            modelAndView.addObject("message", "Пароль должен содержать больше 4 и менее 20");
             return modelAndView;
         }
         if (userRepository.findUserByUsername(username) != null) {
-            modelAndView.addObject("message", "User with this username already exists!");
+            modelAndView.addObject("message", "Пользователь с таким именем уже существует");
             return modelAndView;
         }
 
@@ -62,7 +62,7 @@ public class SecurityController {
         Authority authority = new Authority(username, Authority.Role.ROLE_USER);
         authorityRepository.save(authority);
 
-        modelAndView.addObject("message", "User %s successfully saved!".formatted(username));
+        modelAndView.addObject("message", "Пользователь %s зарегистрирован!".formatted(username));
         return modelAndView;
     }
 }

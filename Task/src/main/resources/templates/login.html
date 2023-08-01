@@ -12,7 +12,7 @@
 <body>
 <form class="form-signin" th:action="@{/login}" method="post">
     <h2 class="form-signin-heading">Пожалуйста, войдите.</h2>
-    <p><div><input class="form-control" type="text" name="username" placeholder="Имя ползователя"/></div></p>
+    <p><div><input class="form-control" type="text" name="username" placeholder="Имя пользователя"/></div></p>
     <p><div><input class="form-control" type="password" name="password" placeholder="Пароль"/></div></p>
     <div th:if="${param.error}">
         Неправильные имя пользователя или пароль.
